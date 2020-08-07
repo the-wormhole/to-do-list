@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+    </head>
+    <body>
+        <header>
+            <div>
+                <h1>TO-DO App</h1>
+            </div>
+        </header>
+        <main>
+            <section id="add-new">
+                <form action="/create-task" method="POST">
+                    <div>
+                        <input type="text" placeholder="Add new task" name="Task">
+                        <button type="button">+</button>
+                    </div>
+                    <div>
+                        <select name = "category">
+                            <option value="" disabled selected>Choose a Category</option>
+                            <option value="personal">Personal</option>
+                            <option value="work">Work</option>
+                            <option value="family">Family</option>
+                            <option value="college">College</option>
+                            <option value="study">Study</option>
+                        </select>
+                        <input type="date" id="start" name="duedate" min="2020-08-11" max="2022-08-11" placeholder="Due Date">
+                    </div>
+                    <button type="submit">Add new Task</button>
+                </form>
+            </section>
+            <section id="To-do">
+                <h2>Tasks-to-do</h2>
+                <div>
+                    <% for(let i of to_do_list){ %>
+                    <ul>
+                        <li>
+                            <p><%= i.task %></p>
+                            <span><%= i.category %></span>
+                            <span><%= i.Due_Date %></span>
+                        </li>
+                    </ul>
+                    <% } %>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
