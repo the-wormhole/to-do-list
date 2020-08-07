@@ -37,19 +37,44 @@
                 <div>
                     <ul>
                     <% for(let i of to_do_list){ %>
-                    
-                        <li>
-                            <p><%= i.task %></p>
-                            <span><%= i.category %></span>
-                            <span><%= i.Due_Date %></span>
-                            <button type="button">Mark Completed</button>
-                            <a href="/delete-task/?id=<%=  i._id %> ">
-                                <button type="button"><i class="far fa-trash-alt"></i></button>
-                            </a>
-                            <div><button type="button">View Task</button></div>
-                        </li>
-                    
+                        <% if(i.Completed == false){ %>
+                            <li>
+                                <p><%= i.task %></p>
+                                <span><%= i.category %></span>
+                                <span><%= i.Due_Date %></span>
+                                <a href="/completed/?id=<%=  i._id %> ">
+                                    <button type="button">Mark Completed</button>
+                                </a>
+                                <a href="/delete-task/?id=<%=  i._id %> ">
+                                    <button type="button"><i class="far fa-trash-alt"></i></button>
+                                </a>
+                                <a href="/view-task/?id=<%=  i._id %> ">
+                                    <div>
+                                        <button type="button">View Task</button>
+                                    </div>
+                                </a>
+                            </li>
+                        <% } %>
                     <% } %>
+                    </ul>
+                </div>
+            </section>
+            <section id="Completed">
+                <h2>Completed Tasks</h2>
+                <div>
+                    <ul>
+                        <% for(let i of to_do_list){ %>
+                            <% if(i.Completed == true){ %>
+                                <li>
+                                    <p><%= i.task %></p>
+                                    <span><%= i.category %></span>
+                                    <span><%= i.Due_Date %></span>
+                                    <a href="/delete-task/?id=<%=  i._id %> ">
+                                        <button type="button"><i class="far fa-trash-alt"></i></button>
+                                    </a>
+                                </li>
+                            <% } %>
+                        <% } %>    
                     </ul>
                 </div>
             </section>

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/to_do_list');
-
+// making use and modify disabled
+mongoose.set('useFindAndModify', false);;
 const db = mongoose.connection;
 
 

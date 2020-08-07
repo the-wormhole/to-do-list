@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title><% var i = view_task %><%= i.task %></title>
+    </head>
+    <body>
+        <h1>Task opened</h1>
+        <div>
+            <div>
+                <h2><%= i.task %></h2>
+            </div>
+            <div style="display:flex ;">
+                <div>
+                    <%= i.category %>
+                </div>
+                <div>
+                    <%= i.Due_Date %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
