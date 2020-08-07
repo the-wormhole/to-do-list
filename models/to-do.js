@@ -12,6 +12,9 @@ const to_doschema = new mongoose.Schema({
     Due_Date: {
         type: String,
         required: true
+    },
+    Completed: {
+        type: Boolean,
     }
 });
 

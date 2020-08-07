@@ -26,7 +26,8 @@ module.exports.create_t = function(req,res){
     task.create({
         task: req.body.Task,
         category: req.body.category,
-        Due_Date: req.body.duedate
+        Due_Date: req.body.duedate,
+        Completed: false
     },function(err, newTask){
         if(err){
             console.log('Error in creating the task!');
@@ -38,4 +39,20 @@ module.exports.create_t = function(req,res){
 
    // return res.redirect('home')
     
+}
+
+
+module.exports.delete_t = function(req,res){
+    //getting id
+    let id = req.query.id;
+
+    task.findByIdAndDelete(id, function(err){
+        if(err){
+            console.log('Error in deleting tasks from database****');
+            return;
+        }
+
+        return res.redirect('back');
+    })
+
 }
