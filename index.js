@@ -4,7 +4,7 @@ const port = 8000;
 
 
 
-app.use(express.static('assets'));
+app.use(express.static('./assets'));
 //called middleware before router 
 app.use(express.urlencoded());
 

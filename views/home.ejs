@@ -4,80 +4,149 @@
             <%= title %>
         </title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+   
+        <link rel = "stylesheet" type="text/css" href="/css/home.css">
     </head>
     <body>
-        <header>
-            <div>
-                <h1>TO-DO App</h1>
-            </div>
-        </header>
-        <main>
-            <section id="add-new">
-                <form action="/create-task" method="POST">
-                    <div>
-                        <input type="text" placeholder="Add new task" name="Task">
-                        <button type="button">+</button>
-                    </div>
-                    <div>
-                        <select name = "category">
-                            <option value="" disabled selected>Choose a Category</option>
-                            <option value="personal">Personal</option>
-                            <option value="work">Work</option>
-                            <option value="family">Family</option>
-                            <option value="college">College</option>
-                            <option value="study">Study</option>
-                        </select>
-                        <input type="date" id="start" name="duedate" min="2020-08-11" max="2022-08-11" placeholder="Due Date">
-                    </div>
-                    <button type="submit">Add new Task</button>
-                </form>
-            </section>
-            <section id="To-do">
-                <h2>Tasks-to-do</h2>
-                <div>
-                    <ul>
-                    <% for(let i of to_do_list){ %>
-                        <% if(i.Completed == false){ %>
-                            <li>
-                                <p><%= i.task %></p>
-                                <span><%= i.category %></span>
-                                <span><%= i.Due_Date %></span>
-                                <a href="/completed/?id=<%=  i._id %> ">
-                                    <button type="button">Mark Completed</button>
-                                </a>
-                                <a href="/delete-task/?id=<%=  i._id %> ">
-                                    <button type="button"><i class="far fa-trash-alt"></i></button>
-                                </a>
-                                <a href="/view-task/?id=<%=  i._id %> ">
-                                    <div>
-                                        <button type="button">View Task</button>
-                                    </div>
-                                </a>
-                            </li>
-                        <% } %>
-                    <% } %>
-                    </ul>
+        
+        <section class="app-container">
+
+            <header>
+                <div class="app-name heading">
+                    <h1>TO-DO App</h1>
                 </div>
-            </section>
-            <section id="Completed">
-                <h2>Completed Tasks</h2>
-                <div>
-                    <ul>
+            </header>
+            
+            <main>
+                <!-- Form to input task -->
+                <section id="add-new">
+                    <form action="/create-task" method="POST">
+                        <div class="add-cat">
+                            <input type="text" placeholder="Add new task" name="Task" class="input-field" required >
+                            <button type="button" id="add-btn">+</button>
+                        </div>
+                        <div class="task-details" id="detail">
+                            <select name = "category" class="input-field" required>
+                                <option value="" disabled selected>Choose a Category</option>
+                                <option value="personal">Personal</option>
+                                <option value="work">Work</option>
+                                <option value="family">Family</option>
+                                <option value="college">College</option>
+                                <option value="study">Study</option>
+                            </select>
+                            <input type="date" id="start" name="duedate" min="2020-08-11" max="2022-08-11" placeholder="Due Date" required class="input-field">
+                            <button type="submit"><i class="fas fa-thumbtack"></i><div></div> Add new Task</button>
+                        </div>
+                        
+                    </form>
+                </section>
+
+                <!-- Incomlete tasks -->
+                <section id="To-do">
+                    <h2 class="heading">Tasks to do</h2>
+                    <div id="incomplete">
+                        <ul style="list-style-type:none;">
                         <% for(let i of to_do_list){ %>
-                            <% if(i.Completed == true){ %>
+                            <% if(i.Completed == false){ %>
                                 <li>
-                                    <p><%= i.task %></p>
-                                    <span><%= i.category %></span>
-                                    <span><%= i.Due_Date %></span>
-                                    <a href="/delete-task/?id=<%=  i._id %> ">
-                                        <button type="button"><i class="far fa-trash-alt"></i></button>
+                                    <h3 style="color: black;"><p><%= i.task %></p></h3>
+                                    <div class="task-container" >
+                <!-- This is done to specify the colour of the category box being displayed -->
+
+                                        <% if(i.category == "study"){ %>
+                                        <div id="cat-display" style="background-color: red;">
+                                               <% }  %>
+                                        <% if(i.category == "personal"){ %>
+                                        <div id="cat-display" style="background-color: blue;">
+                                               <% } %>
+                                        <% if(i.category == "work"){ %>
+                                        <div id="cat-display" style="background-color: green;">
+                                               <% } %>
+                                        <% if(i.category == "family"){ %>
+                                        <div id="cat-display" style="background-color: purple;">
+                                                    
+                                               <% } %>
+                                        <% if(i.category == "college"){ %>
+                                        <div id="cat-display" style="background-color: yellow;">
+                            
+                                               <% }  %>
+                                            <%= i.category %>
+                                        </div>
+                                        <div class="date">Due Date: <%= i.Due_Date %></div>
+                                        <a href="/completed/?id=<%=  i._id %> ">
+                                            <button type="button" style="background-image: linear-gradient(to right ,green, white, green);">Mark Completed</button>
+                                        </a>
+                                        <a href="/delete-task/?id=<%=  i._id %> ">
+                                            <button type="button" style="background-image: linear-gradient(to right ,red, white, red);"><i class="far fa-trash-alt"></i></button>
+                                        </a>
+                                    </div>
+                                    <a href="/view-task/?id=<%=  i._id %> ">
+                                        <div class="view-btn">
+                                            <button type="button">View Task</button>
+                                        </div>
                                     </a>
                                 </li>
                             <% } %>
-                        <% } %>    
-                    </ul>
-                </div>
-            </section>
-        </main>
+                        <% } %>
+                        </ul>
+                    </div>
+                </section>
+                <!-- Tasks marked completed -->
+                <section id="Completed">
+                    <h2 class="heading">Completed Tasks</h2>
+                    <div class="comp-container">
+                        <ul style="list-style-type:none;">
+                            <% for(let i of to_do_list){ %>
+                                <% if(i.Completed == true){ %>
+                                    <li>
+                                        <p><%= i.task %></p>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <% if(i.category == "study"){ %>
+                                                <span id="cat-display" style="background-color: red;">
+                                                       <% }  %>
+                                            <% if(i.category == "personal"){ %>
+                                                <span id="cat-display" style="background-color: blue;">
+                                                        <% } %>
+                                            <% if(i.category == "work"){ %>
+                                                 <span id="cat-display" style="background-color: green;">
+                                                        <% } %>
+                                                 <% if(i.category == "family"){ %>
+                                                 <span id="cat-display" style="background-color: purple;">
+                                                             
+                                                        <% } %>
+                                                 <% if(i.category == "college"){ %>
+                                                 <span id="cat-display" style="background-color: yellow;">
+                                     
+                                                        <% }  %>
+                                                     <%= i.category %>
+                                                </span>
+                                            <span class="date">Due Date: <%= i.Due_Date %></span>
+                                            <a href="/delete-task/?id=<%=  i._id %> ">
+                                                <button type="button" style="background-image: linear-gradient(to right ,red, white, red);"><i class="far fa-trash-alt"></i></button>
+                                            </a>
+                                        </div>
+                                    </li>
+                                <% } %>
+                            <% } %>    
+                        </ul>
+                    </div>
+                </section>
+            </main>
+        </section>
+
+
+
+        <script type="text/javascript" > 
+            var details = document.getElementById('add-btn');
+            var details_section = document.getElementById('detail');
+            details.addEventListener('click',function(){
+                details_section.style.width = '100%';
+                details_section.style.height = 'auto';
+                details_section.style.opacity = '1';
+                console.log('+ pressed');
+                });
+        </script>
+
+        
     </body>
 </html>

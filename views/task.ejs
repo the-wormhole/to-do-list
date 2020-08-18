@@ -1,21 +1,42 @@
 <html>
     <head>
+        <link rel = "stylesheet" type="text/css" href="/css/task.css">
         <title><% var i = view_task %><%= i.task %></title>
     </head>
     <body>
-        <h1>Task opened</h1>
-        <div>
-            <div>
-                <h2><%= i.task %></h2>
-            </div>
-            <div style="display:flex ;">
-                <div>
-                    <%= i.category %>
+        <main>
+            <h1 class="align-center">Task opened</h1>
+            <div class="detail-container">
+                <div class="task-container align-center ">
+                    <h2><%= i.task %></h2>
                 </div>
-                <div>
-                    <%= i.Due_Date %>
+                <div class="info">
+
+                    <!-- To specify colour of category -->
+                    <% if(i.category == "study"){ %>
+                        <div class="cat" style="background-color: red;">
+                               <% }  %>
+                        <% if(i.category == "personal"){ %>
+                        <div class="cat" style="background-color: blue;">
+                               <% } %>
+                        <% if(i.category == "work"){ %>                                                 
+                        <div class="cat" style="background-color: green;">
+                               <% } %>
+                        <% if(i.category == "family"){ %>
+                        <div class="cat" style="background-color: purple;">
+                                    
+                               <% } %>
+                        <% if(i.category == "college"){ %>
+                        <div class="cat" style="background-color: yellow;">
+            
+                               <% }  %>
+                            <%= i.category %>
+                        </div>
+                    <div>
+                        <%= i.Due_Date %>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </body>
 </html>
